@@ -1,5 +1,5 @@
 import pandas as pd
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import json
 
 app = Flask(__name__)
@@ -42,7 +42,7 @@ def microservice(**kwargs):
     ## Replace 'Name' with '' to return the entire row by default
     if kwargs.get('filter', 'Name').title() in VALID_FILTERS:
         data = [ row.get(kwargs.get('filter', 'Name')) for row in data ]
-    return data
+    return jsonify(data)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)
